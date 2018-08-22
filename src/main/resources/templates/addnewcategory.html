@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>Add new category</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<style>
+		
+		.gradientbackgr{
+  			background: #fffff0;
+	 		background: radial-gradient(#0ed61f, #bfc2ff);
+		}
+	</style>
+</head>
+<body class="gradientbackgr">
+
+
+<div class="container-fluid" align="center">
+	<h1>Add new category:</h1>
+	<form action="/addnewcategory/1" method="post" id="addnewcateg">
+		<div class="form-group">
+			<label for="categ_name">New category name:</label>
+			<input type="text" class="form-control" id="categ_name" required="required" placeholder="Enter new name" name="name" form="addnewcateg" style="width:350px" >
+		</div>
+		<div class="form-group">
+			<label for="categ_descr">New category description:</label>
+			<input type="text" class="form-control" id="categ_descr" required="required" placeholder="Enter new description" name="description" form="addnewcateg" style="width:350px" >
+		</div>
+
+			<button type="submit" class="btn btn-primary">Add new category</button>
+			<button type="submit" class="btn btn-primary" form="reset_form">Go to main page</button>
+	</form>
+	<form id="reset_form" action="/index" method="get">
+
+	</form>
+
+
+	<div>
+		<table class="table table-bordered table-active table-hover">
+			<thead>
+				<th></th>
+				<th></th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Description</th>
+			</thead>
+			<tbody>
+				<tr th:each="categ : ${categories}">
+					<td>
+						<form action="/addnewcategory/2" method="post" >
+							<button type="submit" class="btn btn-primary">Edit</button>
+							<input type="number" hidden  th:value="${categ.id}" name="chosenCategoryId">
+						</form>
+					</td>
+					<td>
+						<form action="/addnewcategory/3" method="post" >
+							<button type="submit" class="btn btn-primary">Delete</button>
+							<input type="number" hidden  th:value="${categ.id}" name="chosenCategoryId">
+						</form>
+					</td>
+					<td th:text="${categ.id}"> </td>
+					<td th:text="${categ.name}"> </td>
+					<td th:text="${categ.description}"> </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<br>
+<div class = "container-fluid">
+
+
+
+</div>
+	
+</div>
+
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>

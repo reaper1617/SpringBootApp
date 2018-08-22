@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <style>
+
+        .gradientbackgr{
+            background: #fffff0;
+            background: radial-gradient(#0ed61f, #bfc2ff);
+        }
+    </style>
+
+</head>
+<body class="gradientbackgr">
+<div class="container">
+    <div class = "sticky-top">
+        <form action="/addnewproduct" method="get" id="addnewprod">
+            <h3>Products <button class = "btn btn-primary" type = "submit" form="addnewprod">Add new product</button> or <button class = "btn btn-primary" type = "submit" form="addnewcateg">Manage categories</button></h3>
+        </form>
+        <form action="/addnewcategory" method="get" id="addnewcateg">
+
+        </form>
+    </div>
+    <div >
+        <form action="/search" method="post" id="search_form">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Search..."  name="searchText" form="search_form">
+                </div>
+                <div class="col">
+                    <button class = "btn btn-primary" type = "submit">Show results</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div th:replace="catalog :: catalog_fragment"></div>
+</div>
+</body>
+</html>
