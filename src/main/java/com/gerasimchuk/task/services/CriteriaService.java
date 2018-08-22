@@ -43,12 +43,12 @@ public class CriteriaService {
         CriteriaBuilder criteriaBuilder =  entityManager.getCriteriaBuilder();
         CriteriaQuery<Product> productCriteria = criteriaBuilder.createQuery(Product.class);
         Root<Product> productRoot = productCriteria.from(Product.class);
-        productCriteria.select(productRoot).where(criteriaBuilder.like(productRoot.get("name"),search+"%"));
+        productCriteria.select(productRoot).where(criteriaBuilder.like(productRoot.get("name"),"%"+search+"%"));
         List<Product> result = entityManager.createQuery(productCriteria).getResultList();
 
         CriteriaQuery<Category> categoryCriteria = criteriaBuilder.createQuery(Category.class);
         Root<Category> categoryRoot = categoryCriteria.from(Category.class);
-        categoryCriteria.select(categoryRoot).where(criteriaBuilder.like(categoryRoot.get("name"), search+"%"));
+        categoryCriteria.select(categoryRoot).where(criteriaBuilder.like(categoryRoot.get("name"), "%"+search+"%"));
         List<Category> result2 = entityManager.createQuery(categoryCriteria).getResultList();
 
         List<Product> allProducts = productService.findAll();
